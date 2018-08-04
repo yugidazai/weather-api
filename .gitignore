@@ -17,3 +17,6 @@ dist/
 
 # VSCode config
 .DS_Store
+
+# Test results
+test-report.xml

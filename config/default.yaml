@@ -1,6 +1,8 @@
 api:
   port: 5000
 
+default_test_time_out: 5000
+
 weather_api:
   # FREE
   # api_key: 7f0a3e6623e327d9b8240a109893690e

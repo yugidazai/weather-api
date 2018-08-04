@@ -13,7 +13,7 @@ router.get(`/`, (req, res) => res.send(`API Running`));
 /**
  * GET
  */
-// router.get(`/get-weather`, execute(weather_presenter.getWeatherInfo), dispatch());
+router.get(`/get-weather`, execute(weather_presenter.getWeatherInfo), dispatch());
 
 // Export the express.Router() instance to be used by server.ts
 export default router;
