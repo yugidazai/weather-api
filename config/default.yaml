@@ -1,0 +1,47 @@
+api:
+  port: 5000
+
+weather_api:
+  # FREE
+  # api_key: 7f0a3e6623e327d9b8240a109893690e
+  # url: http://api.openweathermap.org/data/2.5/{path}
+  # path:
+  #   current: "/weather"
+  #   forecast: "forecast" # Next 5 days / 3hours
+
+  # from Udemy course, can access up to 16 days/daily forecast API
+  api_key: 6a78596d062df78380eff5944c4e5567
+  days_to_forecast: 5
+  url: http://api.openweathermap.org/data/2.5/forecast/daily
+  query_string: appid={api_key}&q={search}&units=metric&cnt={days_to_forecast}
+
+  icon_url: https://openweathermap.org/img/w/{icon}.png
+  # Mapping icon images (from OpenWeatherMap) and icon classes (http://erikflowers.github.io/weather-icons)
+  weather_icon_mapping:
+    # clear sky
+    "01d": "wi wi-day-sunny"
+    "01n": "wi wi-night-clear"
+    # few clouds
+    "02d": "wi wi-day-cloudy-high"
+    "02n": "wi wi-night-cloudy-high"
+    # scattered clouds
+    "03d": "wi wi-day-cloudy"
+    "03n": "wi wi-night-cloudy"
+    # broken clouds
+    "04d": "wi wi-day-cloudy-gusts"
+    "04n": "wi wi-night-cloudy-gusts"
+    # shower rain
+    "09d": "wi wi-day-showers"
+    "09n": "wi wi-night-showers"
+    # rain
+    "10d": "wi wi-day-rain"
+    "10n": "wi wi-night-rain"
+    # thunderstorm
+    "11d": "wi wi-day-thunderstorm"
+    "11n": "wi wi-night-thunderstorm"
+    # snow
+    "13d": "wi wi-day-snow"
+    "13n": "wi wi-night-snow"
+    # mist
+    "50d": "wi wi-day-fog"
+    "50n": "wi wi-night-fog"
