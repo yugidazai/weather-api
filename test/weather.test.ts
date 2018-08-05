@@ -1,5 +1,6 @@
 import { Test, executeTest }  from "./helper/base";
 import { weather_controller } from "../src/controllers/weather";
+import { IWeatherContent, IDailyWeather } from "../src/interfaces/weather";
 
 const weather_test = new Test("Weather");
 
@@ -33,42 +34,51 @@ describe(`searchWeather`, () => {
 
     executeTest(`search weather by city: Sydney`,
       weather_controller.getWeatherByCity,
-      done => (err: any, result: any) => {
+      done => (err: any, result: IWeatherContent) => {
         expect(err).toBeFalsy();
         expect(result).toBeDefined();
-        expect(result.current).toBeDefined();
-        expect(result.current.temp).toBeDefined();
-        expect(result.current.temp.eve).toBeDefined();
-        expect(result.current.weather[0]).toBeDefined();
-        expect(result.current.weather[0].icon).toBeDefined();
-        expect(result.city).toBeDefined();
-        expect(result.city.name).toBe("Sydney");
-        expect(result.city.country).toBe("AU");
-        expect(result.forecast).toBeDefined();
-        expect(result.forecast).toHaveLength(5);
+
+        const { current, city, forecast } = result;
+        expect(city).toBeDefined();
+        expect(city.name).toBe("Sydney");
+        expect(city.country).toBe("AU");
+        expect(forecast).toBeDefined();
+        expect(forecast).toHaveLength(5);
+        expect(current).toBeDefined();
+
+        const { temp, weather } = current;
+        expect(temp).toBeDefined();
+        expect(temp.eve).toBeDefined();
+        expect(weather[0]).toBeDefined();
+        expect(weather[0].icon).toBeDefined();
+
         done();
       },
       { city: "Sydney" }
     );
 
-    executeTest(`search weather by city: Melbourne`,
+    executeTest(`search weather by city: Melbourne, forecast 10 days`,
       weather_controller.getWeatherByCity,
-      done => (err: any, result: any) => {
+      done => (err: any, result: IWeatherContent) => {
         expect(err).toBeFalsy();
         expect(result).toBeDefined();
-        expect(result.current).toBeDefined();
-        expect(result.current.temp).toBeDefined();
-        expect(result.current.temp.eve).toBeDefined();
-        expect(result.current.weather[0]).toBeDefined();
-        expect(result.current.weather[0].icon).toBeDefined();
-        expect(result.city).toBeDefined();
-        expect(result.city.name).toBe("Melbourne");
-        expect(result.city.country).toBe("AU");
-        expect(result.forecast).toBeDefined();
-        expect(result.forecast).toHaveLength(5);
+
+        const { current, city, forecast } = result;
+        expect(city).toBeDefined();
+        expect(city.name).toBe("Melbourne");
+        expect(city.country).toBe("AU");
+        expect(forecast).toBeDefined();
+        expect(forecast).toHaveLength(10);
+        expect(current).toBeDefined();
+
+        const { temp, weather } = current;
+        expect(temp).toBeDefined();
+        expect(temp.eve).toBeDefined();
+        expect(weather[0]).toBeDefined();
+        expect(weather[0].icon).toBeDefined();
         done();
       },
-      { city: "Melbourne" }
+      { city: "Melbourne", days_to_forecast: 10 }
     );
   });
 
